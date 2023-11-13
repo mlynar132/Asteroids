@@ -1,6 +1,7 @@
 #include "ObjectManager.h"
 
 #include "Asteroid.h"
+#include "Game.h"
 #include "GameObject.h"
 #include "Ship.h"
 
@@ -43,7 +44,7 @@ void ObjectManager::RenderObjects()
 
 GameObject* ObjectManager::SpawnObject(GameObject* object)
 {
-    Objects.emplace_back(object/*new ObjectBall{250,400, "Assets/dude.png"}*/);
+    Objects.emplace_back(object);
     return object;
 }
 
@@ -86,9 +87,17 @@ void ObjectManager::CheckCollision()
 
 bool ObjectManager::CheckForGameOver()
 {
+    if (Game::StressTestingMode)
+    {
+        if (Game::CloseGame)
+        {
+            return true;
+        }
+        return false;
+    }
     for (int i = 0; i < Objects.size(); i++)
     {
-        if (typeid(Objects[i]) == typeid(Ship))
+        if (Ship* ship = dynamic_cast<Ship*>(Objects[i].get()))
         {
             return false;
         }

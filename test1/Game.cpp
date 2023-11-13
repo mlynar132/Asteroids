@@ -6,13 +6,16 @@
 #include "Ship.h"
 
 SDL_Renderer* Game::renderer = nullptr;
+//do not change 
 int Game::Width = 0;
 int Game::Height = 0;
 int Game::Score = 0;
 int Game::Hits = 0;
 
+// change
 bool Game::StressTestingMode = false;
 bool Game::Invincible = true;
+bool Game::CloseGame = false;
 
 
 Game::Game()
@@ -76,10 +79,10 @@ void Game::HandleEvents()
 void Game::Update()
 {
     ObjectManager::GetInstance()->UpdateObjects();
-    if (TickCounter >= 60)
+    if (TickCounter >= SpawnInterval)
     {
-        SpawnWave(SpawnAmount);
-        SpawnAmount *= 2;
+        SpawnWave(static_cast<int>(SpawnAmount));
+        SpawnAmount *= SpawnIncrease;
         TickCounter = 0;
     }
     else
@@ -87,10 +90,10 @@ void Game::Update()
         TickCounter++;
     }
     std::cout << ObjectManager::GetInstance()->ObjectAmount() << '\n';
-    // if (ObjectManager::GetInstance()->CheckForGameOver())
-    // {
-    //     Game::Clean();
-    // }
+    if (ObjectManager::GetInstance()->CheckForGameOver())
+    {
+        Game::Clean();
+    }
 }
 
 void Game::Render()
@@ -105,6 +108,7 @@ void Game::Clean()
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
+    bIsRunning = false;
     std::cout << "GAME CLEANED\n";
 }
 

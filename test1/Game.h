@@ -26,11 +26,14 @@ public:
     static int Hits;
     static bool StressTestingMode;
     static bool Invincible;
+    static bool CloseGame;
     //TODO: make is super big bump up the asteroid spawn rate turn of death and just save when the app goes bellow 60 and then 30 FPS.
 
 private:
     int TickCounter = 0;
-    int SpawnAmount = 5;
+    float SpawnAmount = 25;
+    float SpawnIncrease = 1.5f;
+    int SpawnInterval = 300; // this is in frames
     void SpawnWave(int amount);
     bool bIsRunning;
     Ship* Player;
