@@ -62,14 +62,9 @@ void ObjectManager::CheckCollision()
     {
         for (int j = i + 1; j < Objects.size(); j++)
         {
-            // Ship* s = dynamic_cast<Ship*>(Objects[i].get());
-            // Asteroid* a = dynamic_cast<Asteroid*>(Objects[j].get());
-            // if (s && a)
-            // {
-            //     std::cout<<Objects[i]->Location.DistanceTo(Objects[j]->Location) << "\n";
-            // }
-            if (static_cast<float>(Objects[i]->Radius + Objects[j]->Radius) >=
-                Objects[i]->Location.DistanceTo(Objects[j]->Location))
+            float distance = Objects[i]->Location.DistanceToSqrtLess(Objects[j]->Location);//Without sqrt cuz it's quicker to multiply the radius than do sqrt
+
+            if (static_cast<float>((Objects[i]->Radius + Objects[j]->Radius) * (Objects[i]->Radius + Objects[j]->Radius)) >= distance)
             {
                 Objects[i]->OnCollision(Objects[j].get());
                 Objects[j]->OnCollision(Objects[i].get());

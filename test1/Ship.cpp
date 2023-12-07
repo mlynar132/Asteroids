@@ -80,7 +80,7 @@ void Ship::TakeDamage()
 {
     if (Game::Invincible || Game::StressTestingMode)
     {
-        return; 
+        return;
     }
     HP--;
     if (HP <= 0)

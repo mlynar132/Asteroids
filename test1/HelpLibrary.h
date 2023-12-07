@@ -1,7 +1,6 @@
 #pragma once
 
 #include <ostream>
-#include <math.h>
 
 #define PI 3.14159265f
 
@@ -101,6 +100,11 @@ struct vec2df
     float DistanceTo(vec2df target)
     {
         return sqrt((target.x - this->x) * (target.x - this->x) + (target.y - this->y) * (target.y - this->y));
+    };
+
+    float DistanceToSqrtLess(vec2df target)
+    {
+        return (target.x - this->x) * (target.x - this->x) + (target.y - this->y) * (target.y - this->y);
     };
 };
 

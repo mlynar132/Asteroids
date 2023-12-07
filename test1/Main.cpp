@@ -3,7 +3,6 @@
 #include "Game.h"
 #undef main // this fixes: Error	LNK2019	unresolved external symbol SDL_main referenced in function main_getcmdline	test1	C : \Work\Programming\C++\SDL\test1\test1\SDL2main.lib(SDL_windows_main.obj)	1
 
-
 Game* Game = nullptr;
 
 int main(int argc, const char* argv[])
