@@ -27,6 +27,6 @@ Based of the proffiling of the above proffiling the two main isssue are sudden s
 Solution for the first problem is a Desgin Patern called FlyWieght, which boils down to reussing assets saving on memory and in addition saving some time that would be spend on loading assets.
 ![Alt text](2000withFlyWeight.png?raw=true "Optional Title")
 
-Unfortunetly I didn't manage to eliminate the bigger problem which is checking the collision and around 1500 asteroids game drops bellow 30FPS as it needs to make around 1,125,000 comparisons.
+Unfortunetly I didn't manage to eliminate the bigger problem which is checking the collision and around 1500 asteroids game drops bellow 30FPS as it needs to make around 1,125,000 comparisons ((1+N)*(N/2)).
 A small improvement was made when I switched to checking the condition from using the sqrt on distance in favor of multiplying the requierd distance for collision.
 I thought of implementing space partitioning but sadly I was running low on time and was not sure if that would actually make a significant problem since the asteroids are packed so tighlty when they are in those numbers.
